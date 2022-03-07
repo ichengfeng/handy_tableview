@@ -253,7 +253,8 @@ class _HandyTableViewState extends State<HandyTableView> {
             ? widget.tableViewFooterBuilder!(context)
             : Container();
       }else {
-        item = widget.cellForRowBuilder(context, rowModel.indexPath);
+        IndexPath indexPath = IndexPath(rowModel.indexPath.section-1,rowModel.indexPath.row);
+        item = widget.cellForRowBuilder(context, indexPath);
       }
     } else {
       item = Container();
