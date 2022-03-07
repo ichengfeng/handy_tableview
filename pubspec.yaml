@@ -1,7 +1,7 @@
 name: handy_tableview
 description: Achieve IOS style uitableview effect.
 version: 0.0.1
-homepage: https://github.com
+homepage: https://github.com/ichengfeng/handy_tableview.git
 
 environment:
   sdk: ">=2.14.0 <3.0.0"

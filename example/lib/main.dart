@@ -38,17 +38,18 @@ class CFHomePage extends StatelessWidget {
           return Image.network('https://picsum.photos/375/180?random=1',fit: BoxFit.cover,);
         },
         tableViewFooterBuilder: (ctx) {
-          return Image.network('https://picsum.photos/375/49?random=2',fit: BoxFit.cover,);
+          return Image.network('https://picsum.photos/375/88?random=2',fit: BoxFit.cover,);
         },
         cellForRowBuilder: (ctx,indexPath) {
           return Container(
-            padding: EdgeInsets.all(indexPath.row%2 == 1 ? 24 : 12),
             color: Colors.primaries[indexPath.row%Colors.primaries.length],
-            child: Text('${indexPath.row}'),
+            child: indexPath.section == 1 && indexPath.row == 1
+                ? Image.network('https://picsum.photos/375/88?random=3',fit: BoxFit.cover,)
+                : Container(padding: const EdgeInsets.all(24),child: Text('${indexPath.row}')),
           );
         },
         sectionHeaderBuilder: (ctx, section) {
-          return defaultContainerBuilder("Header",backgroundColor: Colors.white);
+          return defaultContainerBuilder("Header == $section",backgroundColor: Colors.white);
         },
         sectionFooterBuilder: (ctx, section) {
           return defaultContainerBuilder("Footer",backgroundColor: const Color(0xFFF8F8F8));
@@ -62,7 +63,10 @@ class CFHomePage extends StatelessWidget {
       color: backgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 12),
       alignment: Alignment.center,
-      child: Text('----- $text -----',style: TextStyle(color: text == "Header" ? Colors.red : Colors.orange),),
+      child: Text(
+        '----- $text -----',
+        style: TextStyle(color: text == "Header" ? Colors.red : Colors.orange),
+      ),
     );
   }
 }

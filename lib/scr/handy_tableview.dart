@@ -85,7 +85,8 @@ class _HandyTableViewState extends State<HandyTableView> {
             GlobalKey key = keyList[currentIndex];
             if (key.currentContext == null) {
               _currentIndex = currentIndex;
-              _size = Size(_size.width, sectionList[currentIndex].headerHeight!);
+              _size = Size(_size.width, sectionList[currentIndex].headerHeight ?? 0);
+
             } else {
               _currentIndex = currentIndex - 1;
             }
@@ -233,13 +234,13 @@ class _HandyTableViewState extends State<HandyTableView> {
       item = Container(
         key: keyList[sectionHeaderModel.section],
         child: widget.sectionHeaderBuilder != null
-            ? widget.sectionHeaderBuilder!(context, sectionHeaderModel.section)
+            ? widget.sectionHeaderBuilder!(context, sectionHeaderModel.section-1)
             : Container(),
       );
     } else if (model is SectionFooterModel) {
       SectionFooterModel sectionFooterModel = model;
       item = widget.sectionFooterBuilder != null
-          ? widget.sectionFooterBuilder!(context,sectionFooterModel.section)
+          ? widget.sectionFooterBuilder!(context,sectionFooterModel.section-1)
           : Container();
     } else  if (model is RowModel){
       RowModel rowModel = model;
