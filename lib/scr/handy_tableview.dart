@@ -147,29 +147,31 @@ class _HandyTableViewState extends State<HandyTableView> {
         rowCount = widget.numberOfRowsInSection(section-1);
       }
 
-      bool headerExist = false;
-      bool footerExist = false;
+      SectionModel sectionModel;
+      if(section == 0 || section == sections-1) {
 
-      late Widget header = Container(); //获取header
-      if (widget.sectionHeaderBuilder != null) {
-        headerExist = true;
-        header = widget.sectionHeaderBuilder!(context, section);
       }
-      late Widget footer = Container(); //获取footer
-      if (widget.sectionFooterBuilder != null) {
-        footerExist = true;
-        footer = widget.sectionFooterBuilder!(context, section);
-      }
-
-      SectionModel sectionModel =
-      SectionModel(section, rowCount, headerExist, footerExist, header);
       if (section == 0) {
         sectionModel = SectionModel(0, 1, false, false, Container());
         currentSectionModel = sectionModel;
-      }
-      if (section == sections-1) {
+      }else  if (section == sections-1) {
         sectionModel = SectionModel(sections-1, 1, false, false, Container());
-        currentSectionModel = sectionModel;
+      }else {
+        bool headerExist = false;
+        bool footerExist = false;
+
+        late Widget header = Container(); //获取header
+        if (widget.sectionHeaderBuilder != null) {
+          headerExist = true;
+          header = widget.sectionHeaderBuilder!(context, section-1);
+        }
+        late Widget footer = Container(); //获取footer
+        if (widget.sectionFooterBuilder != null) {
+          footerExist = true;
+          footer = widget.sectionFooterBuilder!(context, section-1);
+        }
+        sectionModel =
+            SectionModel(section, rowCount, headerExist, footerExist, header);
       }
       sectionList.add(sectionModel);
 

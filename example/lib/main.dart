@@ -49,23 +49,33 @@ class CFHomePage extends StatelessWidget {
           );
         },
         sectionHeaderBuilder: (ctx, section) {
+          if(section == 1) {
+            return Container(
+              height: 120,
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                image: DecorationImage(image: NetworkImage("https://picsum.photos/375/120?random=4"),fit: BoxFit.cover,),
+              ),
+              child: defaultContainerBuilder('Header == $section',backgroundColor: Colors.transparent),
+            );
+          }
           return defaultContainerBuilder("Header == $section",backgroundColor: Colors.white);
         },
         sectionFooterBuilder: (ctx, section) {
-          return defaultContainerBuilder("Footer",backgroundColor: const Color(0xFFF8F8F8));
+          return defaultContainerBuilder("Footer",backgroundColor: const Color(0xFFF8F8F8),footer: true);
         },
       ),
     );
   }
 
-  Widget defaultContainerBuilder(String text,{Color backgroundColor = Colors.white}) {
+  Widget defaultContainerBuilder(String text,{Color backgroundColor = Colors.white, bool footer = false}) {
     return Container(
       color: backgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 12),
       alignment: Alignment.center,
       child: Text(
         '----- $text -----',
-        style: TextStyle(color: text == "Header" ? Colors.red : Colors.orange),
+        style: TextStyle(color: footer ? Colors.orange : Colors.red),
       ),
     );
   }
